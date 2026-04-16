@@ -49,11 +49,34 @@ This is your `ZOTERO_GROUP_ID`.
 
 ## Installation
 
+### Homebrew (macOS)
+
+```bash
+brew install abtris/tap/zotero-mcp-go-server
+```
+
+### Docker
+
+```bash
+docker pull abtris/zotero-mcp-go-server:latest
+```
+
+Run with Docker:
+
+```bash
+docker run --rm \
+  -e ZOTERO_API_KEY="your-api-key" \
+  -e ZOTERO_USER_ID="your-user-id" \
+  abtris/zotero-mcp-go-server:latest
+```
+
+### Go install
+
 ```bash
 go install github.com/abtris/zotero-mcp-go-server@latest
 ```
 
-Or build from source:
+### Build from source
 
 ```bash
 git clone https://github.com/abtris/zotero-mcp-go-server.git
