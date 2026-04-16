@@ -1,0 +1,8 @@
+.git
+.github
+*.md
+go.sum
+go.mod
+internal/
+main.go
+renovate.json
