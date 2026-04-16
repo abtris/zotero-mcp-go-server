@@ -116,57 +116,7 @@ The server communicates over stdio using the MCP protocol.
 
 ## Supported Tools
 
-### `search_items`
-
-Search for items in the Zotero library by query string.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `query` | string | Yes | Search query string |
-| `limit` | integer | No | Max results, 1–100 (default: 25) |
-| `item_type` | string | No | Filter by item type (e.g. `book`, `journalArticle`, `conferencePaper`) |
-
-### `get_item`
-
-Get full details of a specific Zotero item by its key.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `item_key` | string | Yes | The Zotero item key (e.g. `ABCD1234`) |
-
-### `list_collections`
-
-List collections (folders) in the Zotero library.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `limit` | integer | No | Max results, 1–100 (default: 25) |
-
-### `list_collection_items`
-
-List items in a specific Zotero collection.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `collection_key` | string | Yes | The collection key |
-| `limit` | integer | No | Max results, 1–100 (default: 25) |
-
-### `list_tags`
-
-List tags in the Zotero library.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `limit` | integer | No | Max results, 1–100 (default: 50) |
-
-### `list_items_by_tag`
-
-List items that have a specific tag.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `tag` | string | Yes | The tag to filter by |
-| `limit` | integer | No | Max results, 1–100 (default: 25) |
+See [TOOLS.md](TOOLS.md) for the full list of 14 supported tools (7 read, 7 write).
 
 ## Testing and Debugging
 
