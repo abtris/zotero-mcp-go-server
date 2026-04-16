@@ -22,11 +22,13 @@ builds:
 
 archives:
   - id: default
-    format: tar.gz
+    formats:
+      - tar.gz
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
 
 checksum:
   name_template: "checksums.txt"
@@ -40,41 +42,31 @@ changelog:
       - "^ci:"
       - "^chore:"
 
-dockers:
-  - image_templates:
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-amd64"
-    use: buildx
-    build_flag_templates:
-      - "--platform=linux/amd64"
+dockers_v2:
+  - images:
+      - "abtris/zotero-mcp-go-server"
+    tags:
+      - "{{ .Version }}"
+      - "latest"
     dockerfile: Dockerfile
-    goarch: amd64
-  - image_templates:
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-arm64"
-    use: buildx
-    build_flag_templates:
-      - "--platform=linux/arm64"
-    dockerfile: Dockerfile
-    goarch: arm64
+    platforms:
+      - linux/amd64
+      - linux/arm64
 
-docker_manifests:
-  - name_template: "abtris/zotero-mcp-go-server:{{ .Version }}"
-    image_templates:
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-amd64"
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-arm64"
-  - name_template: "abtris/zotero-mcp-go-server:latest"
-    image_templates:
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-amd64"
-      - "abtris/zotero-mcp-go-server:{{ .Version }}-arm64"
-
-brews:
+homebrew_casks:
   - name: zotero-mcp-go-server
     repository:
       owner: abtris
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: "https://github.com/abtris/zotero-mcp-go-server"
     description: "MCP server for Zotero, written in Go"
-    license: "MIT"
-    test: |
-      system "#{bin}/zotero-mcp-go-server 2>&1 || true"
+    url:
+      verified: github.com/abtris/zotero-mcp-go-server
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/zotero-mcp-go-server"]
+          end
