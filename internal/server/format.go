@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/abtris/zotero-go-client/zotero"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
@@ -68,6 +69,20 @@ func formatCollectionsResult(colls []*zotero.Collection) *mcp.CallToolResult {
 	data, _ := json.MarshalIndent(summaries, "", "  ")
 	return &mcp.CallToolResult{
 		Content: []mcp.Content{&mcp.TextContent{Text: string(data)}},
+	}
+}
+
+// formatWriteResponse formats the result of a write operation as an MCP tool result.
+func formatWriteResponse(action, itemKey string, details map[string]any) *mcp.CallToolResult {
+	var sb strings.Builder
+	sb.WriteString(fmt.Sprintf("Successfully %s item %s", action, itemKey))
+	if len(details) > 0 {
+		sb.WriteString("\n\n")
+		data, _ := json.MarshalIndent(details, "", "  ")
+		sb.WriteString(string(data))
+	}
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{&mcp.TextContent{Text: sb.String()}},
 	}
 }
 
