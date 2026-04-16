@@ -3,7 +3,7 @@ module github.com/abtris/zotero-mcp-go-server
 go 1.26.2
 
 require (
-	github.com/abtris/zotero-go-client v0.0.0-20260415133648-096e472b067d
+	github.com/abtris/zotero-go-client v1.1.0
 	github.com/modelcontextprotocol/go-sdk v1.5.0
 )
 
