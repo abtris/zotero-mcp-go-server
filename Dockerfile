@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.24
 RUN apk add --no-cache ca-certificates && \
     adduser -D -h /home/appuser appuser
 ARG TARGETPLATFORM
