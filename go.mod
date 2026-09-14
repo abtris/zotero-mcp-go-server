@@ -4,7 +4,7 @@ go 1.26.2
 
 require (
 	github.com/abtris/zotero-go-client v1.1.0
-	github.com/modelcontextprotocol/go-sdk v1.7.0
+	github.com/modelcontextprotocol/go-sdk v1.8.0
 )
 
 require (
